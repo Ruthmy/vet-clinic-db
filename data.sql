@@ -7,8 +7,6 @@ INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) 
 
 /* From task: query and update animals table */
 
-ALTER TABLE animals ADD COLUMN species VARCHAR(50) NOT NULL DEFAULT 'unknown';
-
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg, species) VALUES ('Charmander', '2020-02-08', 0, FALSE, -11, 'unknown');
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg, species) VALUES ('Plantmon', '2021-11-15', 2, TRUE, -5.7, 'unknown');
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg, species) VALUES ('Squirtle', '1993-04-02', 3, FALSE, -12.13, 'unknown');
