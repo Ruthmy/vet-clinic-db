@@ -18,6 +18,7 @@ UPDATE animals SET species = 'unspecified';
 SELECT * FROM animals;
 
 ROLLBACK;
+SELECT * FROM animals; -- verify that change was undone
 
 -- Update animals table, set species column to digimon for all animals ending in mon and pokemon for all animals without a species already set.
 -- Commit the transaction. Verify that changes persist after commit.
