@@ -6,5 +6,5 @@ CREATE TABLE animals (
     date_of_birth DATE NOT NULL CHECK (date_of_birth <= CURRENT_DATE),
     espace_attempts INT NOT NULL,
     neutered BOOLEAN NOT NULL,
-    weight_kg DECIMAL(5,2) CHECK (weight_kg > 0)
+    weight_kg DECIMAL(5,2)
 );
