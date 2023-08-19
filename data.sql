@@ -44,3 +44,64 @@ UPDATE animals SET owner_id = 3 WHERE(name = 'Devimon' OR name = 'Plantmon');
 UPDATE animals SET owner_id = 4 WHERE(name = 'Charmander' OR name = 'Squirtle' OR name = 'Blossom');
 -- Dean Winchester owns Angemon and Boarmon.
 UPDATE animals SET owner_id = 5 WHERE(name = 'Angemon' OR name = 'Boarmon');
+
+/* From task: add "join table" for visits */
+
+-- Insert data into the vets table.
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('William Tatcher', 45, '2000-04-23');
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('Maisy Smith', 26, '2019-01-17');
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('Stephanie Mendez', 64, '1981-05-04');
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('Jack Harkness', 38, '2008-06-08');
+
+-- Insert data for specializations:
+
+-- Vet William Tatcher is specialized in Pokemon.
+INSERT INTO specializations (vet_id, specialty_id) VALUES (1, 1);
+-- Vet Stephanie Mendez is specialized in Digimon and Pokemon.
+INSERT INTO specializations (vet_id, specialty_id) VALUES (3, 1);
+INSERT INTO specializations (vet_id, specialty_id) VALUES (3, 2);
+-- Vet Jack Harkness is specialized in Digimon.
+INSERT INTO specializations (vet_id, specialty_id) VALUES (4, 2);
+
+--Insert data for visits.
+
+-- Agumon visited William Tatcher on May 24th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-05-24', 1, 1);
+-- Agumon visited Stephanie Mendez on Jul 22th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-07-22', 1, 3);
+-- Gabumon visited Jack Harkness on Feb 2nd, 2021.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2021-02-02', 2, 4);
+-- Pikachu visited Maisy Smith on Jan 5th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-01-05', 3, 2);
+-- Pikachu visited Maisy Smith on Mar 8th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-03-08', 3, 2);
+-- Pikachu visited Maisy Smith on May 14th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-05-14', 3, 2);
+-- Devimon visited Stephanie Mendez on May 4th, 2021.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2021-05-04', 4, 3);
+-- Charmander visited Jack Harkness on Feb 24th, 2021.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2021-02-24', 6, 4);
+-- Plantmon visited Maisy Smith on Dec 21st, 2019.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2019-12-21', 7, 2);
+-- Plantmon visited William Tatcher on Aug 10th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-08-10', 7, 1);
+-- Plantmon visited Maisy Smith on Apr 7th, 2021.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2021-04-07', 7, 2);
+-- Squirtle visited Stephanie Mendez on Sep 29th, 2019.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2019-09-29', 8, 3);
+-- Angemon visited Jack Harkness on Oct 3rd, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-10-03', 9, 4);
+-- Angemon visited Jack Harkness on Nov 4th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-11-04', 9, 4);
+-- Boarmon visited Maisy Smith on Jan 24th, 2019.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2019-01-24', 10, 2);
+-- Boarmon visited Maisy Smith on May 15th, 2019.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2019-05-15', 10, 2);
+-- Boarmon visited Maisy Smith on Feb 27th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-02-27', 10, 2);
+-- Boarmon visited Maisy Smith on Aug 3rd, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-08-03', 10, 2);
+-- Blossom visited Stephanie Mendez on May 24th, 2020.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2020-05-24', 11, 3);
+-- Blossom visited William Tatcher on Jan 11th, 2021.
+INSERT INTO visits (date_of_visit, animal_id, vet_id) VALUES ('2021-01-11', 11, 1);
