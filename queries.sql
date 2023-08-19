@@ -11,16 +11,16 @@ SELECT * FROM animals WHERE (weight_kg >= 10.4 AND weight_kg <= 17.3);
 
 /* From task: query and update animals table */
 
--- Inside a transaction update animals table by setting the species column to unspecified. Verify change. roll back the change and verify again.
+-- Inside a transaction, set the species column to unspecified. Verify change. roll back the change and verify again.
 BEGIN TRANSACTION;
 
 UPDATE animals SET species = 'unspecified';
 SELECT * FROM animals;
-
 ROLLBACK;
+
 SELECT * FROM animals; -- verify that change was undone
 
--- Update animals table, set species column to digimon for all animals ending in mon and pokemon for all animals without a species already set.
+-- Set species column to digimon for all animals ending in mon and pokemon for all animals without a species already set.
 -- Commit the transaction. Verify that changes persist after commit.
 
 BEGIN TRANSACTION;
@@ -37,15 +37,13 @@ BEGIN TRANSACTION;
 
 TRUNCATE TABLE animals;
 SELECT * FROM animals;
-
 ROLLBACK;
+
 SELECT * FROM animals;
 
--- Inside a transaction:
--- Delete all animals born after Jan 1st, 2022. Create a savepoint.
+-- Inside a transaction: Delete all animals born after Jan 1st, 2022. Create a savepoint.
 -- Update all animals' weight to be their weight multiplied by -1. Rollback to the savepoint
--- Update all animals' weights that are negative to be their weight multiplied by -1.
--- Commit transaction
+-- Update all animals' weights that are negative to be their weight multiplied by -1. Commit transaction
 
 BEGIN TRANSACTION;
 
@@ -77,3 +75,28 @@ SELECT species, MAX(weight_kg) AS max_weight, MIN(weight_kg) AS min_weight FROM 
 
 -- What is the average number of escape attempts per animal type of those born between 1990 and 2000?
 SELECT species, AVG(escape_attempts) AS average_escape_attempts FROM animals WHERE (date_of_birth >= '1990-01-01' AND date_of_birth <= '2000-12-31') GROUP BY species;
+
+---------
+
+/* From task: query multiple tables */
+
+-- What animals belong to Melody Pond?
+SELECT animals.name AS animal_name, species.name AS species_name, owners.full_name AS owner_name FROM animals JOIN species ON animals.species_id = species.id JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Melody Pond';
+
+-- List of all animals that are pokemon (their type is Pokemon).
+SELECT animals.name AS animal_name, species.name AS species_name FROM animals JOIN species ON animals.species_id = species.id WHERE species.name = 'Pokemon';
+
+-- List all owners and their animals, remember to include those that don't own any animal.
+SELECT owners.full_name AS owner_name, animals.name AS animal_name FROM owners LEFT JOIN animals ON owners.id = animals.owner_id;
+
+-- How many animals are there per species?
+SELECT species.name AS species_name, COUNT(*) AS total_per_species FROM animals LEFT JOIN species ON animals.species_id = species.id GROUP BY species.name;
+
+-- List all Digimon owned by Jennifer Orwell.
+SELECT animals.name AS animal_name, species.name AS species_name, owners.full_name AS owner_name FROM animals JOIN species ON animals.species_id = species.id JOIN owners ON animals.owner_id = owners.id WHERE(owners.full_name = 'Jennifer Orwell' AND species.name = 'Digimon');
+
+-- List all animals owned by Dean Winchester that haven't tried to escape.
+SELECT animals.name AS animal_name, species.name AS species_name, owners.full_name AS owner_name FROM animals JOIN species ON animals.species_id = species.id JOIN owners ON animals.owner_id = owners.id WHERE(owners.full_name = 'Dean Winchester' AND escape_attempts = 0);
+
+-- Who owns the most animals?
+SELECT owners.full_name AS owner_name, COUNT(*) AS total_owned FROM animals LEFT JOIN owners ON animals.owner_id = owners.id GROUP BY owners.full_name ORDER BY total_owned DESC LIMIT 1;
