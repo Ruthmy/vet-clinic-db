@@ -34,3 +34,27 @@ ALTER TABLE animals ADD COLUMN species_id INT, ADD FOREIGN KEY (species_id) REFE
 -- Add column owner_id which is a foreign key referencing the owners table
 ALTER TABLE animals ADD COLUMN owner_id INT, ADD FOREIGN KEY (owner_id) REFERENCES owners (id);
 
+/* From task: add "join table" for visits */
+
+-- Create a table named vets
+CREATE TABLE vets (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL CHECK (age > 18 AND age < 100),
+    date_of_graduation DATE NOT NULL CHECK (date_of_graduation <= CURRENT_DATE)
+);
+
+-- Create a "join table" specializations to handle the relationship between the tables species and vets.
+CREATE TABLE specializations (
+    vet_id INT REFERENCES vets (id),
+    specialty_id INT REFERENCES species (id),
+    PRIMARY KEY (vet_id, specialty_id)
+);
+
+-- Create a "join table" visits to handle the relationship between the tables animals and vets, and also track the date of the visit.
+CREATE TABLE visits (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    date_of_visit DATE NOT NULL CHECK (date_of_visit <= CURRENT_DATE),
+    animal_id INT NOT NULL REFERENCES animals (id),
+    vet_id INT NOT NULL REFERENCES vets (id)
+);
