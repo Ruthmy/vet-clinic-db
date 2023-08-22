@@ -58,3 +58,17 @@ CREATE TABLE visits (
     animal_id INT NOT NULL REFERENCES animals (id),
     vet_id INT NOT NULL REFERENCES vets (id)
 );
+
+/* FROM WEEK 2 - MILESTONE 5 - Database performance audit */
+
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+-- Add an index to the animal_id column of the visits table
+CREATE INDEX idx_visits_animal_id ON visits (animal_id);
+
+-- Add an index to the vet_id column of the visits table
+CREATE INDEX idx_visits_vet_id ON visits (vet_id);
+
+-- Create an index for the 'email' column on the owners table
+CREATE INDEX index_email ON owners (email);
