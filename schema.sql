@@ -70,4 +70,5 @@ CREATE INDEX idx_visits_animal_id ON visits (animal_id);
 -- Add an index to the vet_id column of the visits table
 CREATE INDEX idx_visits_vet_id ON visits (vet_id);
 
-
+-- Create an index for the 'email' column on the owners table
+CREATE INDEX index_email ON owners (email);
