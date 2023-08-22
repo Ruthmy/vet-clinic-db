@@ -58,3 +58,8 @@ CREATE TABLE visits (
     animal_id INT NOT NULL REFERENCES animals (id),
     vet_id INT NOT NULL REFERENCES vets (id)
 );
+
+/* FROM WEEK 2 - MILESTONE 5 - Database performance audit */
+
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
