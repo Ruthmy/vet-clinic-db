@@ -22,20 +22,21 @@ CREATE TABLE IF NOT EXISTS invoices (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE invoice_items (
-  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  unit_price DECIMAL CHECK (unit_price > 0),
-  quantity INTEGER NOT NULL CHECK (quantity > 0),
-  total_price DECIMAL CHECK (total_price > 0),
-  invoice_id INTEGER REFERENCES invoices(id)
-  treatment_id INTEGER REFERENCES treatments(id)
-);
-
 CREATE TABLE treatments (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   type VARCHAR NOT NULL,
   name VARCHAR NOT NULL
 );
+
+CREATE TABLE invoice_items (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  unit_price DECIMAL CHECK (unit_price > 0),
+  quantity INTEGER NOT NULL CHECK (quantity > 0),
+  total_price DECIMAL CHECK (total_price > 0),
+  invoice_id INTEGER REFERENCES invoices(id),
+  treatment_id INTEGER REFERENCES treatments(id)
+);
+
 
 CREATE TABLE medical_histories_treatments (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
