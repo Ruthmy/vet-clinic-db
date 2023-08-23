@@ -44,8 +44,9 @@ CREATE TABLE medical_histories_treatments (
   treatments_id INTEGER REFERENCES treatments(id)
 );
 
--- Create an index for the treatments table
-CREATE INDEX treatments_idx ON treatments (type, name);
+
+-- Create an index for the patient_id in the medical_histories table
+CREATE INDEX patient_id_idx ON medical_histories(patient_id);
 
 -- Create an index for the invoice_items table
 CREATE INDEX invoice_items_idx ON invoice_items (invoice_id, treatment_id);
