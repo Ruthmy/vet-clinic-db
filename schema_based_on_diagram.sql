@@ -12,3 +12,12 @@ CREATE TABLE IF NOT EXISTS medical_histories (
     status VARCHAR NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS invoices (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    total_amount DECIMAL(8,2) NOT NULL,
+    generated_at TIMESTAMP NOT NULL,
+    payed_at TIMESTAMP,
+    medical_history_id INT REFERENCES medical_histories(id),
+    PRIMARY KEY (id)
+);
